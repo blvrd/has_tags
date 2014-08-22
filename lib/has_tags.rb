@@ -1,5 +1,6 @@
 require "has_tags/version"
+require "active_record"
 
 module HasTags
-  # Your code goes here...
+  require "has_tags/tag"
 end
