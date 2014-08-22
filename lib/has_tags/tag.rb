@@ -1,5 +1,5 @@
 module HasTags
   class Tag < ::ActiveRecord::Base
-    validates :name, presence: true  
+    validates :name, uniqueness: true, presence: true  
   end
 end
