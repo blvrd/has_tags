@@ -2,6 +2,7 @@ require 'has_tags'
 require 'support/database_cleaner'
 require 'support/taggable_model'
 require 'database_cleaner'
+require 'shoulda/matchers'
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", 
                                        :database => ":memory:")
