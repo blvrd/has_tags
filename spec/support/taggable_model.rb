@@ -1,3 +1,3 @@
 class TaggableModel < ActiveRecord::Base
-  include HasTags::Taggable
+  has_tags
 end
