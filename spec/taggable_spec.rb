@@ -28,4 +28,11 @@ describe TaggableModel do
       expect(HasTags::Tag.last.context.name).to eq("Lacrosse")
     end
   end
+
+  it "should retrieve tag list" do
+    tag_names = "Sports:Lacrosse"
+    model.tag_list = tag_names
+
+    expect(model.tag_list).to eq("Sports, Lacrosse")
+  end
 end

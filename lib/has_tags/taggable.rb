@@ -7,6 +7,10 @@ module HasTags
       end
     end
 
+    def tag_list
+      tags.map(&:name).join(", ")
+    end
+
     def tag_list=(tag_names)
       tag_names.split(",").map do |tag_name|
         names = tag_name.strip.split(":") 
@@ -20,5 +24,6 @@ module HasTags
         end
       end
     end
+
   end
 end
