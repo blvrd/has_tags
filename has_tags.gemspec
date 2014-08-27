@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "has_tags"
   spec.version       = HasTags::VERSION
   spec.authors       = ["Garrett Martin"]
-  spec.email         = ["garrettqmartin8@optimum.net"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.email         = ["me@garrettqmartin.com"]
+  spec.description   = %q{Simple tagging with contexts.}
+  spec.summary       = %q{Simple tagging with contexts.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
