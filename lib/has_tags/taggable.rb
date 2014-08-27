@@ -36,7 +36,7 @@ module HasTags
             else
               tag = HasTags::Tag.where(name: name, context_id: Tag.find_by(name: names[index-1]).id).first_or_create!
             end
-            HasTags::Tagging.where(tag_id: tag.id, taggable_id: self.id, taggable_type: self.class.to_s).first_or_create!
+            HasTags::Tagging.where(tag_id: tag.id, taggable: self).first_or_create!
           end
         end
       end
