@@ -33,11 +33,19 @@ Now choose a model to add tags to. Let's use <code>Post</code> as an example. Al
 
 Your post class can now have associated tags.
 
-To set tags on a <code>Post</code> instance, whitelist the <code>tag_list</code> parameter in your controller:
+To set tags on a <code>Post</code> instance, whitelist the <code>tag_list</code> parameter and use the <code>tag_list=</code> method in your controller:
 
 ```ruby
 class PostController < ActiveRecord::Base
   # ...
+
+  def create
+    @post = Post.new(post_params)
+
+    if @post.save
+      @post.tag_list = post_params[:tag_list]
+    end
+  end
 
   private
 
@@ -48,6 +56,8 @@ end
 ```
 
 <code>tag_list</code> should be a string with tags separated by commas, or colons to make a context tag.
+
+The <code>tag_list=</code> method will create the <code>Tag</code> and <code>Tagging</code> join model to build the associations.
 
 ### Examples
 
