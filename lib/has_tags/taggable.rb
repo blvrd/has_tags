@@ -16,6 +16,8 @@ module HasTags
     # end
 
     def has_tags
+      after_save :save_taggings
+
       has_many :taggings, as: :taggable, class_name: "HasTags::Tagging"
       has_many :tags, through: :taggings, class_name: "HasTags::Tag"
 
@@ -23,6 +25,14 @@ module HasTags
     end
 
     module InstanceMethods
+      def save_taggings
+        taggings = HasTags::Tagging.where(taggable_type: self.class.to_s, taggable_id: nil)
+        taggings.each do |tagging|
+          tagging.taggable_id = self.id
+          tagging.save
+        end
+      end 
+
       def tag_list
         tags.map(&:name).join(", ")
       end
@@ -35,8 +45,8 @@ module HasTags
               tag = HasTags::Tag.where(name: name).first_or_create!
             else
               tag = HasTags::Tag.where(name: name, context_id: Tag.find_by(name: names[index-1]).id).first_or_create!
-            end
-            HasTags::Tagging.where(tag_id: tag.id, taggable: self).first_or_create!
+            end 
+            HasTags::Tagging.where(tag_id: tag.id, taggable_type: self.class.to_s).first_or_create!
           end
         end
       end
