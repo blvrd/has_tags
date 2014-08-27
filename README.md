@@ -62,7 +62,7 @@ For creating tags within tags, where to top-level tag acts as the context or par
 This creates three tags: Sports, Hockey and Food. Sports is now the context in which Hockey lives. Now we can call:
 
 ```ruby
-context = Tag.find_by(name: "Sports")
+context = HasTags::Tag.find_by(name: "Sports")
 
 context.tags # => Hockey tag
 ```
@@ -72,7 +72,7 @@ The context tag syntax can be nested like so:
 "Sports:Hockey:Strategy"
 
 ```ruby
-strategy = Tag.find_by(name: "Strategy")
+strategy = HasTags::Tag.find_by(name: "Strategy")
 
 hockey = strategy.context # => Hockey tag
 
