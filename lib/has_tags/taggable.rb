@@ -27,6 +27,7 @@ module HasTags
     module InstanceMethods
       def save_taggings
         taggings = HasTags::Tagging.where(taggable_type: self.class.to_s, taggable_id: nil)
+        puts taggings.map(&:attributes)
         taggings.each do |tagging|
           tagging.taggable_id = self.id
           tagging.save
@@ -46,7 +47,7 @@ module HasTags
             else
               tag = HasTags::Tag.where(name: name, context_id: Tag.find_by(name: names[index-1]).id).first_or_create!
             end 
-            HasTags::Tagging.where(tag_id: tag.id, taggable_type: self.class.to_s).first_or_create!
+            HasTags::Tagging.where(tag_id: tag.id, taggable_type: self.class.to_s).create!
           end
         end
       end
