@@ -47,7 +47,7 @@ class PostController < ActiveRecord::Base
 end
 ```
 
-<code>tag_list should be a string with tags separated by commas, or colons to make a context tag.</code>
+<code>tag_list</code> should be a string with tags separated by commas, or colons to make a context tag.
 
 ### Examples
 
