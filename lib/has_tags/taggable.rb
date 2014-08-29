@@ -24,10 +24,15 @@ module HasTags
       include InstanceMethods
     end
 
+    def tagged_with(tag_name)
+      self.all.each do |instance|
+        instance.tags.where("name LIKE ?", tag_name)
+      end
+    end
+
     module InstanceMethods
       def save_taggings
-        taggings = HasTags::Tagging.where(taggable_type: self.class.to_s, taggable_id: nil)
-        puts taggings.map(&:attributes)
+        taggings = HasTags::Tagging.where(taggable_type: self.class.to_s, taggable_id: nil) 
         taggings.each do |tagging|
           tagging.taggable_id = self.id
           tagging.save

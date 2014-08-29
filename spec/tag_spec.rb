@@ -15,5 +15,5 @@ describe HasTags::Tag do
     HasTags::Tag.create(name: "Sports")
     HasTags::Tag.create(name: "Sports") 
     expect(HasTags::Tag.all.count).to eq(1)
-  end
+  end 
 end
