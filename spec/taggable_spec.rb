@@ -44,6 +44,16 @@ describe TaggableModel do
     expect(model.tag_list).to eq("Sports, Lacrosse")
   end
 
+  it "should retrieve all top level tags for class" do
+    model = TaggableModel.new(name: "post") 
+    tag_names = "Sports:Lacrosse"
+    model.tag_list = tag_names
+    model.save
+    tag = model.tags.first
+    
+    expect(TaggableModel.top_level_tags).to include(tag)
+  end
+
   context "TaggableModel.tagged_with" do
     it "should return all intances of it's class that are tagged with a specific tag" do
       model = TaggableModel.new(name: "post") 

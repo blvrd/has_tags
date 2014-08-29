@@ -30,6 +30,11 @@ module HasTags
       end
     end
 
+    def top_level_tags
+      HasTags::Tag.where(context_id: nil) && HasTags::Tag.all
+        .collect{|tag| tag if tag.taggings.where(taggable_type: self.to_s).present? }
+    end
+
     module InstanceMethods
       def save_taggings
         taggings = HasTags::Tagging.where(taggable_type: self.class.to_s, taggable_id: nil) 
