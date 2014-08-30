@@ -78,7 +78,7 @@ Post.top_level_tags # => All tags that are associated with a "Post" object and t
 
 Or for all classes that have tags:
 
-```
+```ruby
 HasTags::Tag.top_level_tags # => All tags that have no parent tags
 ```
 
