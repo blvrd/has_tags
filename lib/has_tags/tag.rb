@@ -9,5 +9,8 @@ module HasTags
 
     validates :name, uniqueness: true, presence: true  
 
+    def self.top_level_tags
+      where(context_id: nil)
+    end
   end
 end
