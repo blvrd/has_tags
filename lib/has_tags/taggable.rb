@@ -24,10 +24,16 @@ module HasTags
       include InstanceMethods
     end
 
-    def tagged_with(tag_name)
-      self.all.each do |instance|
-        instance.tags.where("name LIKE ?", tag_name)
-      end
+    def tagged_with(tag_names)
+      instances = []
+      tag_names.each do |tag_name|
+        self.all.each do |instance|
+          if instance.tags.where("lower(name) LIKE ?", "%#{tag_name}%").present?
+            instances << instance
+          end
+        end
+      end 
+      instances
     end
 
     def top_level_tags

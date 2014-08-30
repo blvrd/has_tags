@@ -61,7 +61,7 @@ describe TaggableModel do
       model.tag_list = tag_names
       model.save
 
-      expect(TaggableModel.tagged_with("Sports")).to include(model)
+      expect(TaggableModel.tagged_with(["sport"])).to include(model)
     end
 
     it "should return tag with similar title" do
@@ -70,7 +70,7 @@ describe TaggableModel do
       model.tag_list = tag_names
       model.save
 
-      expect(TaggableModel.tagged_with("spots")).to include(model) 
+      expect(TaggableModel.tagged_with(["Sports"])).to include(model) 
     end
 
     it "should accept multiple tags to search by" do
@@ -79,7 +79,7 @@ describe TaggableModel do
       model.tag_list = tag_names
       model.save
       
-      expect(TaggableModel.tagged_with("sports", "lacrosse")).to include(model)
+      expect(TaggableModel.tagged_with(["sports", "lacrosse"])).to include(model)
     end
   end
 end
