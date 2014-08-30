@@ -49,6 +49,40 @@ end
 
 <code>tag_list</code> should be a string with tags separated by commas, or colons to create a context tag.
 
+To find all instances of an object associated with a certain tag, use the <code>tagged_with</code> class method, which takes an array of tag names to search by:
+
+```ruby
+Post.tagged_with(["Sports"]) # => All posts tagged with "Sports"
+
+```
+
+Since it accepts an array of tag names, you can something like this:
+
+```ruby
+Post.tagged_with(["Sports", "Lacrosse", "2014"]) # => All posts tagged with "Sports", "Lacrosse", and "2014"
+```
+
+Input to <code>tagged_with</code> doesn't need to be an exact match, making it good for searching:
+
+```ruby
+search_term = params[:search_term] # Let's say a user input "sport"
+
+Post.tagged_with([search_term]) # => All posts tagged with "Sports"
+```
+
+You can also get all of the top level tags for a specific class:
+
+```ruby
+Post.top_level_tags # => All tags that are associated with a "Post" object and that have have no parent tags
+```
+
+Or for all classes that have tags:
+
+```
+HasTags::Tag.top_level_tags # => All tags that have no parent tags
+```
+
+
 ### Examples
 
 For creating top-level tags, a user can type in tags only separated by commas:
