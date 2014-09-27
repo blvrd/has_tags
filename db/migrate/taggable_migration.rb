@@ -8,6 +8,7 @@ class TaggableMigration < ActiveRecord::Migration
     create_table :taggings do |t|
       t.references :tag
       t.references :taggable, polymorphic: true
+      t.references :tagger, polymorphic: true
     end 
   end
 end

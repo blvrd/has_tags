@@ -5,7 +5,7 @@ module HasTags
     include Rails::Generators::Migration
 
     source_root File.expand_path("../../../../db/migrate", __FILE__)
-    
+
     def create_migrations
       migration_template "taggable_migration.rb", "db/migrate/taggable_migration.rb"
     end
