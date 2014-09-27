@@ -7,7 +7,7 @@ module HasTags
 
     has_many :taggings
 
-    validates :name, uniqueness: true, presence: true  
+    validates :name, uniqueness: true, presence: true
 
     def self.top_level_tags
       where(context_id: nil)

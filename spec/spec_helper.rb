@@ -1,6 +1,7 @@
 require 'has_tags'
 require 'support/database_cleaner'
 require 'support/taggable_model'
+require 'support/user'
 require 'database_cleaner'
 require 'shoulda/matchers'
 
@@ -18,11 +19,15 @@ ActiveRecord::Schema.define do
   create_table :taggings, force: true do |t|
     t.references :tag
     t.references :taggable, polymorphic: true
+    t.references :tagger, polymorphic: true
   end
 
   create_table :taggable_models, force: true do |t|
     t.string :name
   end
-  
+
+  create_table :users, force: true do |t|
+    t.string :username
+  end
 end
 

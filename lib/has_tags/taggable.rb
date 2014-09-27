@@ -54,11 +54,18 @@ module HasTags
         tags.map(&:name).join(", ")
       end
 
-      def tag_list=(tag_names)
-        split_keywords_and_create_tags(tag_names)
+      def tag_list=(options = {})
+        tag_list = options[:tag_names]
+        tagger = options[:tagger]
+
+        if tagger.present?
+          split_keywords_and_create_tags(tag_list, tagger)
+        else
+          split_keywords_and_create_tags(tag_list)
+        end
       end
 
-      def split_keywords_and_create_tags(tag_names)
+      def split_keywords_and_create_tags(tag_names, tagger = nil)
         tag_names.split(",").map do |tag_name|
           names = tag_name.strip.split(":")
           names.each_with_index do |name, index|
@@ -67,7 +74,7 @@ module HasTags
             else
               tag = find_or_create_child_tag(name, names, index)
             end 
-            create_tagging_for(tag)
+            create_tagging_for(tag, tagger)
           end
         end
       end
@@ -80,8 +87,8 @@ module HasTags
         HasTags::Tag.where(name: name, context_id: Tag.find_by(name: collection[index-1]).id).first_or_create!
       end
 
-      def create_tagging_for(tag)
-        HasTags::Tagging.where(tag_id: tag.id, taggable_type: self.class.to_s).create!
+      def create_tagging_for(tag, tagger = nil)
+        HasTags::Tagging.where(tag_id: tag.id, taggable_type: self.class.to_s, tagger_id: tagger.try(:id), tagger_type: tagger.class.to_s).create!
       end
 
     end
